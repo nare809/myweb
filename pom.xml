@@ -4,54 +4,42 @@
 	<groupId>in.javahome</groupId>
 	<artifactId>myweb</artifactId>
 	<packaging>war</packaging>
-	<version>8.2.0</version>
-	<name>Java Home myweb</name>
+	<version>0.0.9</version>
+	<name>my-app</name>
 	<url>http://maven.apache.org</url>
 
-	<properties>
-		
-		<docker.image.prefix>kammana</docker.image.prefix>
-		<sonar.host.url>http://13.228.25.213:9000/</sonar.host.url>
-
-	</properties>
-	
-		
 	<dependencies>
-
-		
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.0.1</version>
+			<!-- <scope>provided</scope> -->
+		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>3.8.1</version>
 			<scope>test</scope>
 		</dependency>
-
+		<dependency>
+		    <groupId>com.lowagie</groupId>
+		    <artifactId>itext</artifactId>
+		    <version>2.1.7</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi</artifactId>
+		    <version>5.2.0</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi-ooxml</artifactId>
+		    <version>5.2.0</version>
+		</dependency>
 	</dependencies>
-	
-	<distributionManagement>
-		 <snapshotRepository>
-		    <id>nexusRepo</id>
-		    <url>http://54.178.74.89:8081/repository/sample-snapshots/</url>
-		 </snapshotRepository>
-		
-		<repository>
-		    <id>nexusRepo</id>
-		    <url>http://54.178.74.89:8081/repository/sample-releases/</url>
-		</repository>
-  	</distributionManagement>
-	
-	<build>
-    		<plugins>
-        		<plugin>
-            			<groupId>org.apache.maven.plugins</groupId>
-            			<artifactId>maven-compiler-plugin</artifactId>
-            			<configuration>
-                			<source>1.8</source>
-                			<target>1.8</target>
-            			</configuration>
-        		</plugin>
-    		</plugins>
-	</build>
-
+	<properties>
+   		<maven.compiler.source>7</maven.compiler.source>
+   		<maven.compiler.target>1.7</maven.compiler.target>
+ 	</properties>
 	
 </project>
