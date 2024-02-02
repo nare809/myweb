@@ -40,7 +40,12 @@ pipeline{
             }
         stage("Execute Ansible"){
             steps{
-                ansiblePlaybook credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible2', inventory: 'hosts', playbook: 'deploy_tomcat.yml'
+                ansiblePlaybook credentialsId: 'ssh-id', 
+                disableHostKeyChecking: true, 
+                installation: 'ansible2', 
+                inventory: 'hosts', 
+                playbook: 'deploy_tomcat.yml', 
+                vaultTmpPath: ''
             }
            
         }
