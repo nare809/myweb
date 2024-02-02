@@ -10,7 +10,7 @@ pipeline{
     stages{
         stage("Git Checkout"){
             steps{
-                git credentialsId: 'git-login', url: 'https://github.com/nare809/ansible-Projects.git'
+                git credentialsId: 'git-login', url: 'https://github.com/nare809/myweb.git'
             }
         }
         stage("Maven Build"){
