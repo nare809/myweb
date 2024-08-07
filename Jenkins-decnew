@@ -7,7 +7,7 @@ pipeline{
     stages{
         stage("Git Checkout"){
             steps{
-                git credentialsId: 'github', url: 'https://github.com/nare809/myweb.git'
+                git credentialsId: 'git-login', url: 'https://github.com/nare809/myweb.git'
             }
         }
         stage("Maven Build"){
@@ -18,15 +18,12 @@ pipeline{
         }
         stage("deploy-dev"){
             steps{
-                sshagent(['tomcatserver']) {
-                sh """
-                    scp -o StrictHostKeyChecking=no target/myweb.war  ec2-user@172.31.37.177:/home/ec2-user/apache-tomcat-9.0.85/webapps/
-                    
-                    ssh ec2-user@172.31.37.177 /home/ec2-user/apache-tomcat-9.0.85/bin/shutdown.sh
-                    
-                    ssh ec2-user@172.31.37.177 /home/ec2-user/apache-tomcat-9.0.85/bin/startup.sh
-                
-                """
+                sshagent(['ubuntu']) {
+                sh 'scp -o StrictHostKeyChecking=no target/myweb.war ubuntu@13.233.112.241:/tmp/'
+                        sh 'ssh ubuntu@13.233.112.241 "sudo mv /tmp/myweb.war /home/ubuntu/apache-tomcat-9.0.93/webapps/"'
+                        sh 'ssh ubuntu@13.233.112.241 "sudo chmod +x /home/ubuntu/apache-tomcat-9.0.93/bin/shutdown.sh"'
+                        sh 'ssh ubuntu@13.233.112.241 "sudo /home/ubuntu/apache-tomcat-9.0.93/bin/shutdown.sh"'
+                        sh 'ssh ubuntu@13.233.112.241 "sudo /home/ubuntu/apache-tomcat-9.0.93/bin/startup.sh"'
             }
             
             }
